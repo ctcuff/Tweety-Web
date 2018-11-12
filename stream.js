@@ -1,6 +1,5 @@
 const Twit = require('twit');
-const config = require('./config');
-const dialog = require('electron').remote.dialog;
+
 const $gridContainer = $('.flex-container');
 const $occurrences = $('#occurrences');
 const $input = $('#input-keyword');
@@ -15,7 +14,7 @@ function startStream() {
   let keywords = [];
   
   if ($input.val() === '') {
-    dialog.showErrorBox('Missing keyword', 'You need to enter a keyword.');
+    alert('You need to enter a keyword.');
     return;
   }
   
@@ -27,7 +26,7 @@ function startStream() {
   console.log(`Stream started -> [${keywords}]`);
 
   $input.attr('placeholder', `Keyword(s): ${keywords}`);
-  
+
   // Clear the input field
   $input.val('');
 
