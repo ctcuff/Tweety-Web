@@ -7,19 +7,28 @@
   <link rel="stylesheet" href="style.css">
   <body>
     <div class="input-container">
-      <div class="input-group">
-        <input type="text" class="form-control" placeholder="Keyword" id="input-keyword" autocomplete="off">
+      <div class="shadow input-group">
+        <input type="text" class="form-control" placeholder="Keyword(s):" id="input-keyword" autocomplete="off">
         <div class="input-group-append" id="input-button-addon">
-          <button class="btn btn-outline-dark" type="button" onclick="startStream()">Start</button>
-          <button class="btn btn-outline-dark" type="button" onclick="stopStream()">Stop</button>
+          <button class="btn btn-outline-secondary" id="start" type="button" onclick="startStream()">Start</button>
+          <button class="btn btn-outline-secondary" id="stop" type="button" onclick="stopStream()" disabled="disabled">Stop</button>
         </div>
       </div>
     </div>
     <h2>
       Occurrences: <span id="occurrences">0</span>
     </h2>
-    <div class="flex-container">
-    </div>
+    <div class="flex-container"></div>
+
+    <button id="fab-up" class="shadow btn btn-light" onclick="this.blur(); window.scrollTo(0, 0);">
+      <img src="baseline-arrow_upward-24px.svg"></img>
+    </button>
+
+    <button id="fab-down" class="shadow btn btn-light" onclick="this.blur(); window.scrollTo(0, document.body.scrollHeight);">
+      <img src="baseline-arrow_downward-24px.svg"></img>
+    </button>
+
+    
   </body>
   <!-- Ensures Electron can actually load Bootstrap/JQuery -->
   <script>

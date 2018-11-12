@@ -48,7 +48,7 @@ h2 {
   outline: none;
 }
 
-#fab-down, #fab-up {
+%fab-style {
   position: fixed;
   bottom: 0px;
   right: 0px;
@@ -61,10 +61,15 @@ h2 {
 }
 
 #fab-up {
+  @extend %fab-style;
   margin-bottom: 84px;
 }
 
-#fab-up:hover, #fab-down:hover {
+#fab-down {
+  @extend %fab-style;
+}
+
+#fab-up:hover, #fab-down:hover{
   background-color: #ced4da;
 }
 
@@ -72,4 +77,3 @@ h2 {
   background-color: white;
 }
 
-/*# sourceMappingURL=style.css.map */
