@@ -30,12 +30,12 @@ window.onscroll = () => {
 
 function startStream() {
   let keywords = [];
-  
+
   if ($input.val() === '') {
     dialog.showErrorBox('Missing keyword', 'You need to enter a keyword.');
     return;
   }
-  
+
   // Multiple keywords will be searched based on spaces
   $input.val().split(' ').forEach(word => {
     keywords.push(word);
@@ -45,10 +45,10 @@ function startStream() {
   $start.attr('disabled', 'disabled');
   $stop.removeAttr('disabled');
   $input.attr('placeholder', `Keyword(s): ${keywords}`);
-  
+
   // Clear the input field
   $input.val('');
- 
+
   console.log(`Stream started -> [${keywords}]`);
 
   if (!hasStarted) {
@@ -59,19 +59,19 @@ function startStream() {
     addCard(tweet);
     $occurrences.text(++numOccurrences);
 
-    if (isAtBottom) { 
+    if (isAtBottom) {
       window.scrollTo(0, document.body.scrollHeight);
     }
   });
 
-  hasStarted = true; 
+  hasStarted = true;
 }
 
 function addCard(tweet) {
   let profileLink = `http://twitter.com/${tweet.user.screen_name}`;
 
   // Removes the +0000 2018 from Twitter dates
-  // (Twitter returns it's dates as: Thu Jul 25 22:46:29 +0000 2018) 
+  // (Twitter returns it's dates as: Thu Jul 25 22:46:29 +0000 2018)
   let date = tweet.created_at.slice(0, tweet.created_at.length - 11);
 
   const $cardContainer = $("<div class='card shadow-lg rounded'></div>");
@@ -100,7 +100,7 @@ function stopStream() {
     console.log('Stream stopped');
 
     stream.stop();
-    
+
     // Re-enable the start button but diable the stop button
     $start.removeAttr('disabled');
     $stop.attr('disabled', 'disabled');
