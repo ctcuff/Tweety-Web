@@ -68,7 +68,8 @@ function startStream() {
 }
 
 function addCard(tweet) {
-  let profileLink = `http://twitter.com/${tweet.user.screen_name}`;
+  let profileLink = `https://twitter.com/${tweet.user.screen_name}`;
+  let tweetLink = `https://twitter.com/${tweet.user.screen_name}/status/${tweet.id_str}`;
 
   // Removes the +0000 2018 from Twitter dates
   // (Twitter returns it's dates as: Thu Jul 25 22:46:29 +0000 2018)
@@ -91,6 +92,12 @@ function addCard(tweet) {
   $gridContainer.append($cardContainer);
 
   $cardContainer.click(function() {
+    let win = window.open(tweetLink, '_blank');
+    
+    // The browser has allowed new windows to be opened
+    if (win !== null) {
+      win.focus();
+    }
     console.log(`@${tweet.user.screen_name} => [${JSON.stringify(tweet)}]`);
   });
 }
