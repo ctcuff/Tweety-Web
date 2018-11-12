@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Tweety</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+  </head>
+  <link rel="stylesheet" href="style.css">
+  <body>
+    <div class="input-container">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Keyword" id="input-keyword" autocomplete="off">
+        <div class="input-group-append" id="input-button-addon">
+          <button class="btn btn-outline-dark" type="button" onclick="startStream()">Start</button>
+          <button class="btn btn-outline-dark" type="button" onclick="stopStream()">Stop</button>
+        </div>
+      </div>
+    </div>
+    <h2>
+      Occurrences: <span id="occurrences">0</span>
+    </h2>
+    <div class="flex-container">
+    </div>
+  </body>
+  <!-- Ensures Electron can actually load Bootstrap/JQuery -->
+  <script>
+    if (typeof module === 'object') {
+      window.module = module; module = undefined;
+    }
+  </script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  <script src="stream.js"></script>
+  <script>
+    if (window.module) 
+      module = window.module;
+  </script>
+</html>
+

@@ -1,0 +1,19 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "description": "Listento statuses on Twitter",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron ."
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^3.0.8"
+  },
+  "dependencies": {
+    "moment": "^2.22.2",
+    "twit": "^2.2.11"
+  }
+}
