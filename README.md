@@ -6,5 +6,5 @@ What!?! Another Twitter based project? Am I crazy? Yep, you guessed it! This tim
 ### TODO:
 
 * Add authentication?
-* Fix a bug where pressing stop sometimes won't stop the stream
+* ~~Fix a bug where pressing stop sometimes won't stop the stream~~
 * Implement this as a static website outside of Electron?
