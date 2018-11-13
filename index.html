@@ -13,6 +13,7 @@
         <div class="input-group-append" id="input-button-addon">
           <button class="btn btn-outline-secondary" id="start" type="button">Start</button>
           <button class="btn btn-outline-secondary" id="stop" type="button" disabled="disabled">Stop</button>
+          <button class="btn btn-outline-secondary" id="clear" type="button">Clear</button>
         </div>
       </div>
     </div>
@@ -25,18 +26,19 @@
     <div class="flex-container"></div>
 
     <button id="fab-up" class="shadow btn btn-light">
-      <img src="static/baseline-arrow_upward-24px.svg"></img>
+      <img src="static/baseline-arrow_upward-24px.svg">
     </button>
 
     <button id="fab-down" class="shadow btn btn-light">
-      <img src="static/baseline-arrow_downward-24px.svg"></img>
+      <img src="static/baseline-arrow_downward-24px.svg">
     </button>
-    
+
   </body>
   <!-- Ensures Electron can actually load Bootstrap/JQuery -->
   <script>
     if (typeof module === 'object') {
-      window.module = module; module = undefined;
+      window.module = module;
+      module = undefined;
     }
   </script>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
@@ -48,28 +50,34 @@
       module = window.module;
     }
 
-    $(document).ready(function() {
-      $('#fab-down').click(function() {
+    $(document).ready(function () {
+      $('#fab-down').click(function () {
         // Removes the outline on the button after it's clicked
         this.blur();
         window.scrollTo(0, document.body.scrollHeight);
       });
 
-      $('#fab-up').click(function() {
+      $('#fab-up').click(function () {
         this.blur();
         window.scrollTo(0, 0);
       });
 
-      $('#start').click(function() {
+      $('#start').click(function () {
         this.blur();
         startStream();
       });
 
-      $('#stop').click(function() {
+      $('#stop').click(function () {
         this.blur();
         stopStream();
       });
-    }); 
+
+      $('#clear').click(function () {
+        this.blur();
+        // Removes all tweet cards
+        $('.flex-container').empty();
+      })
+    });
   </script>
 </html>
 

@@ -1,22 +1,24 @@
 const Twit = require('twit');
 const config = require('./config');
 const dialog = require('electron').remote.dialog;
+
 const $gridContainer = $('.flex-container');
 const $occurrences = $('#occurrences');
 const $input = $('#input-keyword');
 const $start = $('#start');
 const $stop = $('#stop');
+
 const T = new Twit(config);
 
 let stream;
 let hasStarted = false;
 let numOccurrences = 0;
-let isAtBottom = true;
+let isAtBottom = false;
 
 // Start the stream when 'enter' is pressed
 $(document).ready(function () {
   $input.keypress(event => {
-    if (event.key === 'Enter') {
+    if (event.key === 'Enter' && !hasStarted) {
       startStream();
     }
   });

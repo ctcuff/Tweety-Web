@@ -14,12 +14,15 @@ h2 {
 }
 
 .input-container {
-  margin: auto;
-  margin-top: 20px;
+  margin: 20px auto auto;
   width: 50%;
   display: flex;
   justify-content: flex-end;
-  border-radius: 0px;
+  border-radius: 0;
+}
+
+#input-keyword:focus {
+  box-shadow: none;
 }
 
 .card {
@@ -41,7 +44,7 @@ h2 {
 }
 
 .btn {
-  border-radius: 0px;
+  border-radius: 0;
 }
 
 .btn:focus {
@@ -50,14 +53,15 @@ h2 {
 
 #fab-down, #fab-up {
   position: fixed;
-  bottom: 0px;
-  right: 0px;
+  bottom: 0;
+  right: 0;
   margin: 16px;
   height: 50px;
   width: 50px;
   border-radius: 50%;
   background-color: white;
   align-content: center;
+  border: 5px solid black;
 }
 
 #fab-up {
