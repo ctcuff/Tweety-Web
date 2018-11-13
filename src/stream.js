@@ -22,8 +22,6 @@ $(document).ready(function() {
   });
 });
 
-// Only scroll to the bottomof the page if the page is
-// already at the bottom
 window.onscroll = () => {
   isAtBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight;
 };
@@ -57,11 +55,29 @@ function startStream() {
 
   stream.on('tweet', tweet => {
     addCard(tweet);
+    // stream.stop();
     $occurrences.text(++numOccurrences);
-
+    
+    // Only scroll to the bottomof the page if the page is
+    // already at the bottom
     if (isAtBottom) {
       window.scrollTo(0, document.body.scrollHeight);
     }
+  });
+
+  stream.on('disconnect', message => {
+    console.log(`disconnect => ${message}`);
+  });
+
+  stream.on('reconnect', function (request, response, connectInterval) {
+    if (!hasStarted) {
+      stream.stop();
+      console.log(`reconnect ${JSON.stringify(response)}`);
+    }
+  });
+
+  stream.on('warning', warning => {
+    console.log(`warning => ${warning}`);
   });
 
   hasStarted = true;
@@ -105,7 +121,6 @@ function addCard(tweet) {
 function stopStream() {
   if (hasStarted) {
     console.log('Stream stopped');
-
     stream.stop();
 
     // Re-enable the start button but diable the stop button
