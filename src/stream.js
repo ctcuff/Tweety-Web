@@ -14,9 +14,9 @@ let numOccurrences = 0;
 let isAtBottom = true;
 
 // Start the stream when 'enter' is pressed
-$(document).ready(function() {
-  $input.keypress(function(event) {
-    if (event.keyCode === 13) {
+$(document).ready(function () {
+  $input.keypress(event => {
+    if (event.key === 'Enter') {
       startStream();
     }
   });
@@ -55,10 +55,9 @@ function startStream() {
 
   stream.on('tweet', tweet => {
     addCard(tweet);
-    // stream.stop();
     $occurrences.text(++numOccurrences);
-    
-    // Only scroll to the bottomof the page if the page is
+
+    // Only scroll to the bottom of the page if the page is
     // already at the bottom
     if (isAtBottom) {
       window.scrollTo(0, document.body.scrollHeight);
@@ -103,13 +102,13 @@ function addCard(tweet) {
   $cardBody.append($cardText);
   $cardBody.append($cardLink);
 
-  $cardContainer.append($cardBody)
+  $cardContainer.append($cardBody);
 
   $gridContainer.append($cardContainer);
 
-  $cardContainer.click(function() {
+  $cardContainer.click(function () {
     let win = window.open(tweetLink, '_blank');
-    
+
     // The browser has allowed new windows to be opened
     if (win !== null) {
       win.focus();
@@ -123,7 +122,7 @@ function stopStream() {
     console.log('Stream stopped');
     stream.stop();
 
-    // Re-enable the start button but diable the stop button
+    // Re-enable the start button but disable the stop button
     $start.removeAttr('disabled');
     $stop.attr('disabled', 'disabled');
     $input.attr('placeholder', 'Keyword(s):');
