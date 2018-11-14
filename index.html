@@ -10,10 +10,10 @@
     <div class="input-container">
       <div class="shadow input-group">
         <input type="text" class="form-control" placeholder="Keyword(s):" id="input-keyword" autocomplete="off">
-        <div class="input-group-append" id="input-button-addon">
-          <button class="btn btn-outline-secondary" id="start" type="button">Start</button>
-          <button class="btn btn-outline-secondary" id="stop" type="button" disabled="disabled">Stop</button>
-          <button class="btn btn-outline-secondary" id="clear" type="button">Clear</button>
+        <div class="input-group-append input-button-addon">
+          <button class="btn btn-outline-secondary" id="start">Start</button>
+          <button class="btn btn-outline-secondary" id="stop" disabled="disabled">Stop</button>
+          <button class="btn btn-outline-secondary" id="clear">Clear</button>
         </div>
       </div>
     </div>
@@ -33,6 +33,15 @@
       <img src="static/baseline-arrow_downward-24px.svg">
     </button>
 
+    <div id="alert-outer">
+      <div id="missing-keyword" class="alert alert-danger">
+        <strong>Enter a keyword</strong>
+        <button type="button" class="close" aria-label="Close" onclick="$('#missing-keyword').hide();">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    </div>
+
   </body>
   <!-- Ensures Electron can actually load Bootstrap/JQuery -->
   <script>
@@ -50,33 +59,35 @@
       module = window.module;
     }
 
-    $(document).ready(function () {
-      $('#fab-down').click(function () {
-        // Removes the outline on the button after it's clicked
-        this.blur();
-        window.scrollTo(0, document.body.scrollHeight);
-      });
+    $('#fab-down').click(function () {
+      // Removes the outline on the button after it's clicked
+      this.blur();
+      window.scrollTo(0, document.body.scrollHeight);
+    });
 
-      $('#fab-up').click(function () {
-        this.blur();
-        window.scrollTo(0, 0);
-      });
+    $('#fab-up').click(function () {
+      this.blur();
+      window.scrollTo(0, 0);
+    });
 
-      $('#start').click(function () {
-        this.blur();
-        startStream();
-      });
+    $('#start').click(function () {
+      this.blur();
+      startStream();
+    });
 
-      $('#stop').click(function () {
-        this.blur();
-        stopStream();
-      });
+    $('#stop').click(function () {
+      this.blur();
+      stopStream();
+    });
 
-      $('#clear').click(function () {
-        this.blur();
-        // Removes all tweet cards
-        $('.flex-container').empty();
-      })
+    $('#clear').click(function () {
+      this.blur();
+      // Removes all tweet cards
+      $('.flex-container').empty();
+    });
+
+    $('#btn-auth').click(function() {
+      this.blur();
     });
   </script>
 </html>

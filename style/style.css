@@ -9,8 +9,49 @@ h2 {
   margin-bottom: 30px;
 }
 
-#input-button-addon {
+.input-button-addon {
   background-color: white;
+}
+
+#input-keyword:focus {
+  box-shadow: none;
+}
+
+#fab-down, #fab-up {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  margin: 16px;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  background-color: white;
+  align-content: center;
+  border: 1px solid black;
+}
+
+#fab-up {
+  margin-bottom: 84px;
+}
+
+#fab-up:hover, #fab-down:hover {
+  background-color: #ced4da;
+}
+
+#fab-up:focus, #fab-down:focus {
+  background-color: white;
+}
+
+#alert-outer {
+  position: absolute;
+  bottom: 30px;
+  width: 100%;
+}
+
+#missing-keyword {
+  display: none;
+  margin: 0 auto;
+  border: 1px solid maroon;
 }
 
 .input-container {
@@ -19,10 +60,6 @@ h2 {
   display: flex;
   justify-content: flex-end;
   border-radius: 0;
-}
-
-#input-keyword:focus {
-  box-shadow: none;
 }
 
 .card {
@@ -51,29 +88,8 @@ h2 {
   outline: none;
 }
 
-#fab-down, #fab-up {
-  position: fixed;
-  bottom: 0;
-  right: 0;
-  margin: 16px;
-  height: 50px;
-  width: 50px;
-  border-radius: 50%;
-  background-color: white;
-  align-content: center;
-  border: 1px solid black;
-}
-
-#fab-up {
-  margin-bottom: 84px;
-}
-
-#fab-up:hover, #fab-down:hover {
-  background-color: #ced4da;
-}
-
-#fab-up:focus, #fab-down:focus {
-  background-color: white;
+.alert {
+  width: 35%;
 }
 
 /*# sourceMappingURL=style.css.map */

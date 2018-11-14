@@ -1,12 +1,12 @@
 const Twit = require('twit');
 const config = require('./config');
-const dialog = require('electron').remote.dialog;
 
 const $gridContainer = $('.flex-container');
 const $occurrences = $('#occurrences');
 const $input = $('#input-keyword');
 const $start = $('#start');
 const $stop = $('#stop');
+const $keyWordAlert = $('#missing-keyword');
 
 const T = new Twit(config);
 
@@ -17,7 +17,7 @@ let isAtBottom = false;
 
 // Start the stream when 'enter' is pressed
 $(document).ready(function () {
-  $input.keypress(event => {
+  $(document).keypress(event => {
     if (event.key === 'Enter' && !hasStarted) {
       startStream();
     }
@@ -32,7 +32,7 @@ function startStream() {
   let keywords = [];
 
   if ($input.val() === '') {
-    dialog.showErrorBox('Missing keyword', 'You need to enter a keyword.');
+    $keyWordAlert.show();
     return;
   }
 
@@ -40,6 +40,12 @@ function startStream() {
   $input.val().split(' ').forEach(word => {
     keywords.push(word);
   });
+
+  if (!$keyWordAlert.hidden) {
+    $keyWordAlert.hide();
+  }
+
+  numOccurrences = 0;
 
   // Disable the start button but enable the stop button
   $start.attr('disabled', 'disabled');
@@ -55,7 +61,7 @@ function startStream() {
     stream = T.stream('statuses/filter', {track: keywords});
   }
 
-  stream.on('tweet', tweet => {
+  stream.on('tweet', (tweet) => {
     addCard(tweet);
     $occurrences.text(++numOccurrences);
 
@@ -66,11 +72,13 @@ function startStream() {
     }
   });
 
-  stream.on('disconnect', message => {
+  stream.on('disconnect', (message) => {
     console.log(`disconnect => ${message}`);
   });
 
   stream.on('reconnect', function (request, response, connectInterval) {
+    // Calling stop reconnects the stream so it has
+    // to be stopped one more time
     if (!hasStarted) {
       stream.stop();
       console.log(`reconnect ${JSON.stringify(response)}`);
@@ -108,7 +116,7 @@ function addCard(tweet) {
 
   $gridContainer.append($cardContainer);
 
-  $cardContainer.click(function () {
+  $cardContainer.click(() => {
     let win = window.open(tweetLink, '_blank');
 
     // The browser has allowed new windows to be opened
@@ -130,6 +138,5 @@ function stopStream() {
     $input.attr('placeholder', 'Keyword(s):');
   }
   hasStarted = false;
-  numOccurrences = 0;
   $occurrences.text(numOccurrences);
 }
