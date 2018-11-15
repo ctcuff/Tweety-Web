@@ -12,15 +12,24 @@ const T = new Twit(config);
 
 let stream;
 let hasStarted = false;
-let numOccurrences = 0;
 let isAtBottom = false;
+let numOccurrences = 0;
 
-// Start the stream when 'enter' is pressed
 $(document).ready(function () {
+  // Start the stream when 'enter' is pressed
   $(document).keypress(event => {
     if (event.key === 'Enter' && !hasStarted) {
       startStream();
     }
+  });
+
+  // Show the tooltip on hover but hide it when the
+  // input has gained focus
+  $input.tooltip({
+    'trigger': 'hover',
+    'title': 'Separate multiple words with commas',
+  }).focus(() => {
+    $input.tooltip('hide')
   });
 });
 
@@ -29,17 +38,16 @@ window.onscroll = () => {
 };
 
 function startStream() {
-  let keywords = [];
-
   if ($input.val() === '') {
     $keyWordAlert.show();
     return;
   }
 
-  // Multiple keywords will be searched based on spaces
-  $input.val().split(' ').forEach(word => {
-    keywords.push(word);
-  });
+  // Multiple keywords will be searched based on commas
+  let keywords = $input
+    .val()
+    .split(',')
+    .map(str => str.trim());
 
   if (!$keyWordAlert.hidden) {
     $keyWordAlert.hide();
@@ -54,14 +62,15 @@ function startStream() {
 
   // Clear the input field
   $input.val('');
+  $input.tooltip('disable');
 
   console.log(`Stream started -> [${keywords}]`);
 
   if (!hasStarted) {
-    stream = T.stream('statuses/filter', {track: keywords});
+    stream = T.stream('statuses/filter', { track: keywords });
   }
 
-  stream.on('tweet', (tweet) => {
+  stream.on('tweet', tweet => {
     addCard(tweet);
     $occurrences.text(++numOccurrences);
 
@@ -72,11 +81,11 @@ function startStream() {
     }
   });
 
-  stream.on('disconnect', (message) => {
+  stream.on('disconnect', message => {
     console.log(`disconnect => ${message}`);
   });
 
-  stream.on('reconnect', function (request, response, connectInterval) {
+  stream.on('reconnect', (request, response, connectInterval) => {
     // Calling stop reconnects the stream so it has
     // to be stopped one more time
     if (!hasStarted) {
@@ -136,6 +145,7 @@ function stopStream() {
     $start.removeAttr('disabled');
     $stop.attr('disabled', 'disabled');
     $input.attr('placeholder', 'Keyword(s):');
+    $input.tooltip('enable');
   }
   hasStarted = false;
   $occurrences.text(numOccurrences);
