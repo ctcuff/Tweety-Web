@@ -15,22 +15,23 @@ let hasStarted = false;
 let isAtBottom = false;
 let numOccurrences = 0;
 
-$(document).ready(function () {
-  // Start the stream when 'enter' is pressed
-  $(document).keypress(event => {
-    if (event.key === 'Enter' && !hasStarted) {
-      startStream();
-    }
-  });
+$(document).keyup(event => {
+  if (event.key === 'Enter' && !hasStarted) {
+    startStream();
+  }
 
-  // Show the tooltip on hover but hide it when the
-  // input has gained focus
-  $input.tooltip({
-    'trigger': 'hover',
-    'title': 'Separate multiple words with commas',
-  }).focus(() => {
-    $input.tooltip('hide')
-  });
+  if (event.key === 'Escape' && hasStarted) {
+    stopStream();
+  }
+});
+
+// Show the tooltip on hover but hide it when the
+// input has gained focus
+$input.tooltip({
+  'trigger': 'hover',
+  'title': 'Separate multiple words with commas',
+}).focus(() => {
+  $input.tooltip('hide')
 });
 
 window.onscroll = () => {

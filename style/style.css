@@ -42,15 +42,18 @@ h2 {
   background-color: white;
 }
 
-#alert-outer {
+#alert-keyword-container, #alt-close-container {
   position: absolute;
   bottom: 30px;
   width: 100%;
 }
 
+#missing-keyword, #alt-close-alert {
+  margin: 0 auto;
+}
+
 #missing-keyword {
   display: none;
-  margin: 0 auto;
   border: 1px solid maroon;
 }
 
