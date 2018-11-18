@@ -5,9 +5,9 @@ What!?! Another Twitter based project? Am I crazy? Yep, you guessed it! This tim
 
 # How do I build this myself?
 There are a few steps to get this to work:
-0. Head over to [Twitter's site](https://developer.twitter.com/en/apply-for-access.html) and apply for a developer account if you don't already have one.
-1. Create a Twitter app (hopefully you still can if you're reading this in 2021) and take note of your keys/access tokens.
-2. Create a file in the root directory of this project called `config.js` that looks *exactly* like this (with your own keys obviously):
+1. Head over to [Twitter's site](https://developer.twitter.com/en/apply-for-access.html) and apply for a developer account if you don't already have one.
+2. Create a Twitter app (hopefully you still can if you're reading this in 2021) and take note of your keys/access tokens.
+3. Create a file in the root directory of this project called `config.js` that looks *exactly* like this (with your own keys obviously):
 ```javascript
 module.exports = {
   consumer_key: 'SomeKeyHere',
@@ -16,4 +16,4 @@ module.exports = {
   access_token_secret: 'SuperDuperSecretKeyHere'
 };
 ```
-3: ~~Cross your fingers and hope the code works~~ Execute `npm start` in the root directory of this project.
+4. ~~Cross your fingers and hope the code works~~ Execute `npm start` in the root directory of this project.
